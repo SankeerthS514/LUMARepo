@@ -22,6 +22,7 @@ import com.grp5.bootcamp4.entity.User;
 import com.grp5.bootcamp4.repo.EmployeeRepository;
 import com.grp5.bootcamp4.repo.UserRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v3")
 public class UserController {

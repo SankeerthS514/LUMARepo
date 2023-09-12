@@ -6,8 +6,8 @@ export default function
     const url = "http://localhost:8080/api/v3/login"
     const [username, setUsername] = useState('');
     const [pass, setPass] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
-
     const handleSubmit = () => {
         console.log(username);
         console.log(pass);
@@ -16,6 +16,8 @@ export default function
           console.log(response);
           if(response.data == 'sucess')
             navigate("/");
+          else
+            setError(response.data);
         })
         .catch(error=>{console.log(error)});
         console.log("sent");
@@ -30,6 +32,11 @@ export default function
   <div className="form-outline mb-4" style = {{"padding":"30px"}}>
     <input onChange={(e)=>setPass(e.target.value)} type="password" id="form2Example2" className="form-control"/>
     <label className="form-label" for="form2Example2">Password</label>
+    {error == 'Fail' && (
+      <div style={{"color":"red"}}>
+        Wrong Password!!!
+      </div>
+    )}
   </div>
 
   <div className="row mb-4">
