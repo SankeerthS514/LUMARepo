@@ -50,13 +50,17 @@ public class UserController {
     public String validateLogin(@RequestBody User user)
 
     {
+    	if(!userRepository.existsById(user.getId()))
+    	{
+    		return "FailUser";
+    	}
     	User tempUser=userRepository.getReferenceById(user.getId());
     	if(tempUser.getpassword().equals(user.getpassword()))
     			{
     		return "sucess";
     			}
     	else {
-    		return "Fail";
+    		return "FailPass";
     	}
     }
 }

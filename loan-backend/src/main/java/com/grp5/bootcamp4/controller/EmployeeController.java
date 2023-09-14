@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.repo.EmployeeRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {

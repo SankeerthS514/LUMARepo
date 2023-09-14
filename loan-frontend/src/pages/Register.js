@@ -3,6 +3,8 @@ import { Card } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
+// const [error,setError] = useState({})
+
 
 function Register(){
     const navigate = useNavigate();
@@ -17,16 +19,17 @@ function Register(){
     const [doj, setDoj] = useState('');
 
 
-
     const handleSubmit = () => {
         console.log(firstname);
         console.log(lastname);
+        //validate
+        
         axios.post(url,{firstName:firstname,lastName:lastname,designation:desig,
         deparment:department,emailId:mail,dob:dob,doj:doj})
         .then(response => {
-          console.log(response);
-          if(response.data == 'sucess')
-            navigate("/");
+            console.log(response);
+            if(response.data == 'sucess')
+                navigate("/login");
         })
         .catch(error=>{console.log(error)});
         console.log("sent");
@@ -71,7 +74,7 @@ function Register(){
                         placeholder="Repeat Password" name="confirm_password" required/>
                     </div> */}
                     <div class="form-outline mb-4 form-group">
-                        <input type="text" id="dob" class="form-control" 
+                        <input type="date" id="dob" class="form-control" 
                         onChange={(e)=>setDob(e.target.value)}
                         placeholder="Enter Date of Birth(YYYY/MM/DD)" onfocus="(this.type='date')"required/>
                     </div>
@@ -94,7 +97,7 @@ function Register(){
                         placeholder="Enter Department" required/>
                     </div>
                     <div class="form-outline mb-4 form-group">
-                        <input type="text" id="jod" class="form-control" 
+                        <input type="date" id="jod" class="form-control" 
                         onChange={(e)=>setDoj(e.target.value)}
                         placeholder="Enter Date of Joining(YYYY/MM/DD)" onfocus="(this.type='date')" required/>
                     </div>

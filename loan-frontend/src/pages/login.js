@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { Button } from 'react-bootstrap';
 export default function 
 () {
     const url = "http://localhost:8080/api/v3/login"
@@ -22,17 +23,25 @@ export default function
         .catch(error=>{console.log(error)});
         console.log("sent");
     }
+    const navigateRegister = () => {
+      navigate("/register");
+    }
   return (
     <form>
   <div className="form-outline mb-4" style = {{"padding":"30px"}}>
     <input onChange={(e)=>setUsername(e.target.value)} type="number" id="form2Example1" className="form-control"  />
     <label className="form-label" for="form2Example1">Username</label>
+    {error == 'FailUser' && (
+      <div style={{"color":"red"}}>
+        User does not exist!
+      </div>
+    )}
   </div>
 
   <div className="form-outline mb-4" style = {{"padding":"30px"}}>
     <input onChange={(e)=>setPass(e.target.value)} type="password" id="form2Example2" className="form-control"/>
     <label className="form-label" for="form2Example2">Password</label>
-    {error == 'Fail' && (
+    {error == 'FailPass' && (
       <div style={{"color":"red"}}>
         Wrong Password!!!
       </div>
@@ -55,7 +64,7 @@ export default function
   <button type="button" className="btn btn-primary btn-block mb-4" onClick={handleSubmit}>Sign in</button>
 
   <div className="text-center">
-    <p>Not a member? <a href="#!">Register</a></p>
+    <p>Not a member? <Button onClick={navigateRegister}>Register</Button></p>
     <p>or sign up with:</p>
     <button type="button" className="btn btn-link btn-floating mx-1">
       <i className="fab fa-facebook-f"></i>
