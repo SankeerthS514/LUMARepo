@@ -1,4 +1,4 @@
-package com.grp5.bootcamp4.controller;
+package com.grp5.bootcamp4.service;
 
 import java.util.*;
 
@@ -20,36 +20,54 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.User;
 import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
-import com.grp5.bootcamp4.service.UserService;
+import com.grp5.bootcamp4.repo.EmployeeRepository;
+import com.grp5.bootcamp4.repo.UserRepository;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v3")
-public class UserController {
+public class UserService {
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
-    @GetMapping("/user")
+
     public List<User> getAllUser() {
-        return userService.getAllUser();
+        return userRepository.findAll();
     }
 
-    @GetMapping("/user/{id}")
-    public Object getUserById(@PathVariable(value = "id") Long userId) {
-    	return userService.getUserById(userId);
+    
+    public Object getUserById(Long userId) {
+    	Object user = userRepository.findById(userId);
+    	return ResponseEntity.ok().body(user);
 	}
     
 
-    @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user) throws RecordAlreadyExistsException{
-    	return userService.createUser(user);
+    
+    public User createUser(User user) throws RecordAlreadyExistsException{
+    	if(userRepository.existsById(user.getId()))
+    	{
+    		throw new RecordAlreadyExistsException("This User Already Exists");
+    	} 
+        return userRepository.save(user);
         
     }
-    @PostMapping("/login")
-    public String validateLogin(@RequestBody User user)
+    
+    public String validateLogin(User user)
 
     {
-    	return userService.validateLogin(user);
-    			
+    	if(!userRepository.existsById(user.getId()))
+    	{
+    		return "FailUser";
+    	}
+    	User tempUser=userRepository.getReferenceById(user.getId());
+    	if(tempUser.getpassword().equals(user.getpassword()))
+    			{
+    		return "sucess";
+    			}
+    	else {
+    		return "FailPass";
+    	}
     }
 }
+
+

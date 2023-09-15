@@ -6,27 +6,42 @@ package com.grp5.bootcamp4.entity;
 import java.util.Date;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
+	
+	
 
     private long id;
-	private User user;
+	
+	@NotBlank(message="Must enter a First Name")
     private String firstName;
+	@NotBlank(message="Must enter an Last Name")
     private String lastName;
+	@NotBlank(message="Must enter an emailID")
     private String emailId;
+	@NotBlank(message="Must enter a Department")
     private String department;
+	@NotBlank(message="Must enter a Designation")
     private String desiganation;
+	@NotNull(message="Must enter a Date of Joining")
     private Date doj;
+	@NotNull(message="Must enter a Date of Birth")
     private Date dob;
+	
+//	@OneToOne(mappedBy="employee")
+//	private User user;
 
     public Employee() {
     	
     }
 
-    public Employee(String firstName, String lastName, String emailId,String department,String desiganation, Date doj, Date dob) {
-        this.firstName = firstName;
+    public Employee(long id, String firstName, String lastName, String emailId,String department,String desiganation, Date doj, Date dob) {
+        this.id = id;
+    	this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.department=department;
@@ -36,7 +51,6 @@ public class Employee {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }

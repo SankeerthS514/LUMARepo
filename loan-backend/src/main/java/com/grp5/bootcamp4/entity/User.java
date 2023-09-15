@@ -1,38 +1,47 @@
 package com.grp5.bootcamp4.entity;
 
 import jakarta.persistence.CascadeType;
+import com.grp5.bootcamp4.service.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_accounts")
 public class User {
+	
 
     private long id;
     private String password;
     private String firstName;
     private String lastName;
     
+//    @OneToOne
+//    @JoinColumn(name="id")
+//    @MapsId
+//    private Employee employee;
 
     public User() {
     	
     }
 
-    public User(String password,String firstName, String lastName) {
+    public User(long id, String password,String firstName, String lastName) {
+    	this.id = id;
         this.password = password;
         this.firstName = firstName;
         this.lastName=lastName;
+
         
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+ 
     public long getId() {
         return id;
     }

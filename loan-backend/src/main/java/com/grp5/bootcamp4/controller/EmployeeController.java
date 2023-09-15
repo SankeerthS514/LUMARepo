@@ -20,51 +20,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Employee;
-import com.grp5.bootcamp4.repo.EmployeeRepository;
+import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
+import com.grp5.bootcamp4.service.EmployeeService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @GetMapping("/employees")
     public List < Employee > getAllEmployees() {
-        return employeeRepository.findAll();
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/employees/{id}")
     public Object getEmployeeById(@PathVariable(value = "id") Long employeeId) {
-    	Object employee = employeeRepository.findById(employeeId);
-    	return ResponseEntity.ok().body(employee);
+    	return employeeService.getEmployeeById(employeeId);
 	}
     
 
     @PostMapping("/employees")
-    public Employee createEmployee(@Valid @RequestBody Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee createEmployee(@Valid @RequestBody Employee employee) throws RecordAlreadyExistsException {
+    	
+        return employeeService.createEmployee(employee);
     }
     @PutMapping("/employees/{id}")
     public ResponseEntity < Employee > updateEmployee(@PathVariable(value = "id") Long employeeId,
         @Valid @RequestBody Employee employeeDetails) throws ServiceNotFoundException {
-        Employee employee = employeeRepository.findById(employeeId)
-            .orElseThrow();
-
-        employee.setEmailId(employeeDetails.getEmailId());
-    
-        final Employee updatedEmployee = employeeRepository.save(employee);
-        return ResponseEntity.ok(updatedEmployee);
+        
+        return employeeService.updateEmployee(employeeId, employeeDetails);
     }
 
     @DeleteMapping("/employees/{id}")
     public Map < String, Boolean > deleteEmployee(@PathVariable(value = "id") Long employeeId)
     {
-    
-
-        employeeRepository.deleteById(employeeId);
-        Map < String, Boolean > response = new HashMap < > ();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+       return employeeService.deleteEmployee(employeeId); 
     }
 }
