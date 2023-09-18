@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.User;
+import com.grp5.bootcamp4.exceptions.EmployeeDoesNotExistException;
 import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
 import com.grp5.bootcamp4.service.UserService;
 
@@ -41,7 +42,7 @@ public class UserController {
     
 
     @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user) throws RecordAlreadyExistsException{
+    public User createUser(@Valid @RequestBody User user) throws RecordAlreadyExistsException,EmployeeDoesNotExistException{
     	return userService.createUser(user);
         
     }
