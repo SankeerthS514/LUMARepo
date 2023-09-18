@@ -42,9 +42,8 @@ public class EmployeeService {
     }
 
     
-    public Object getEmployeeById(Long employeeId) {
-    	Object employee = employeeRepository.findById(employeeId);
-    	return ResponseEntity.ok().body(employee);
+    public Employee getEmployeeById(Long employeeId) {
+    	return employeeRepository.findById(employeeId).get();
 	}
     
 

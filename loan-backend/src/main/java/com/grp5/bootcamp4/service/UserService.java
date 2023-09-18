@@ -36,9 +36,8 @@ public class UserService {
     }
 
     
-    public Object getUserById(Long userId) {
-    	Object user = userRepository.findById(userId);
-    	return ResponseEntity.ok().body(user);
+    public User getUserById(Long userId) {
+    	return userRepository.findById(userId).get();
 	}
     
 
