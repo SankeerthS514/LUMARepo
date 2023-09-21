@@ -2,6 +2,8 @@ package com.grp5.bootcamp4.service;
 
 import java.util.*;
 
+import javax.management.ServiceNotFoundException;
+
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,29 @@ public class UserService {
     	}
         return userRepository.save(user);
         
+    }
+    
+    public ResponseEntity updateUser(Long userId, User userDetails) throws ServiceNotFoundException {
+ 
+            User user = userRepository.findById(userId)
+                .orElseThrow();
+
+            user.setpassword(userDetails.getpassword());
+            
+        
+            final User updatedUser = userRepository.save(user);
+            return ResponseEntity.ok(updatedUser);
+    }
+    
+
+    public Map < String, Boolean > deleteUser(@PathVariable(value = "id") Long userId)
+    {
+    
+
+        userRepository.deleteById(userId);
+        Map < String, Boolean > response = new HashMap < > ();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
     
     public String validateLogin(User user)

@@ -58,13 +58,20 @@ public class EmployeeService {
    
     public ResponseEntity < Employee > updateEmployee(Long employeeId,
         @Valid @RequestBody Employee employeeDetails) throws ServiceNotFoundException {
-        Employee employee = employeeRepository.findById(employeeId)
-            .orElseThrow();
+    	    Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow();
+            employee.setFirstName(employeeDetails.getFirstName());
+            employee.setLastName(employeeDetails.getLastName());
+            employee.setdeparment(employeeDetails.getdeparment());
+            employee.setdob(employeeDetails.getdob());
+            employee.setdesignation(employeeDetails.getdesignation());
+            
+            employee.setdoj(employeeDetails.getdoj());
 
-        employee.setEmailId(employeeDetails.getEmailId());
-    
-        final Employee updatedEmployee = employeeRepository.save(employee);
-        return ResponseEntity.ok(updatedEmployee);
+            employee.setEmailId(employeeDetails.getEmailId());
+        
+            final Employee updatedEmployee = employeeRepository.save(employee);
+            return ResponseEntity.ok(updatedEmployee);
     }
 
     public Map < String, Boolean > deleteEmployee(Long employeeId)
