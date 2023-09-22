@@ -15,7 +15,7 @@ public class Issued {
 
     private long id;
     private long empid;
-    
+    private long loan_id;
     private long item_id;
     private Date issue_date;
    

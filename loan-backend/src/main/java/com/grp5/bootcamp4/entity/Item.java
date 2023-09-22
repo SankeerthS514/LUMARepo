@@ -14,12 +14,12 @@ import jakarta.persistence.Table;
 public class Item {
 
     private long id;
-    private String item_cat;
+    private String itemcat;
     
-    private String item_make;
-    private String item_desc;
+    private String itemmake;
+    private String itemdesc;
    
-    private long item_value;
+    private long itemvalue;
     
     private String status;
    
@@ -31,12 +31,12 @@ public class Item {
     	
     }
 
-    public Item(String item_cat, String item_make, String item_desc, long item_value, String status) {
+    public Item(String itemcat, String itemmake, String itemdesc, long itemvalue, String status) {
         
-        this.item_cat=item_cat;
-        this.item_make=item_make;
-        this.item_desc=item_desc;
-        this.item_value=item_value;
+        this.itemcat=itemcat;
+        this.itemmake=itemmake;
+        this.itemdesc=itemdesc;
+        this.itemvalue=itemvalue;
         
         this.status=status;
        
@@ -55,43 +55,45 @@ public class Item {
   
 
     
-   @Column(name = "Item Category", nullable = false)
+   
     
-    public String getItem_cat() {
-	return item_cat;
+    public String getItemcat() {
+	return itemcat;
 }
 
-public void setItem_cat(String item_cat) {
-	this.item_cat = item_cat;
-}
-@Column(name = "Item Make", nullable = false)
-public String getItem_make() {
-	return item_make;
+public void setItemcat(String itemcat) {
+	this.itemcat = itemcat;
 }
 
-public void setItem_make(String item_make) {
-	this.item_make = item_make;
-}
-@Column(name = "Item Desc", nullable = false)
-
-public String getItem_desc() {
-	return item_desc;
+public String getItemmake() {
+	return itemmake;
 }
 
-public void setItem_desc(String item_desc) {
-	this.item_desc = item_desc;
-}
-@Column(name = "Item Value", nullable = false)
-
-public long getItem_value() {
-	return item_value;
+public void setItemmake(String itemmake) {
+	this.itemmake = itemmake;
 }
 
-public void setItem_value(long item_value) {
-	this.item_value = item_value;
+
+public String getItemdesc() {
+	return itemdesc;
 }
 
-@Column(name = "Status", nullable = false)
+public void setItemdesc(String itemdesc) {
+	this.itemdesc = itemdesc;
+}
+
+
+public long getItemvalue() {
+	return itemvalue;
+}
+
+public void setItemvalue(long itemvalue) {
+	this.itemvalue = itemvalue;
+}
+
+
+
+
 public String getStatus() {
 	return status;
 }

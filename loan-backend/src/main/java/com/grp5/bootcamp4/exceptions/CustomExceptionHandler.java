@@ -63,5 +63,12 @@ public class CustomExceptionHandler{
 		System.out.println(ex.getMessage());
 		return new ErrorResponse(HttpStatus.NOT_FOUND.value(),ex.getMessage());
 	}
+	
+	@ExceptionHandler(value = ItemIsNotAvailableException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public @ResponseBody ErrorResponse handleItemIsNotAvailableException(ItemIsNotAvailableException ex) {
+		System.out.println(ex.getMessage());
+		return new ErrorResponse(HttpStatus.NOT_FOUND.value(),ex.getMessage());
+	}
 }
 			

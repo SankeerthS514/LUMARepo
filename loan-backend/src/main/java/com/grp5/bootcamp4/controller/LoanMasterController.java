@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.Master;
+import com.grp5.bootcamp4.exceptions.ItemIsNotAvailableException;
 import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
 import com.grp5.bootcamp4.service.EmployeeService;
 import com.grp5.bootcamp4.service.LoanService;
@@ -46,16 +47,16 @@ public class LoanMasterController {
     
 
     @PostMapping("/loan")
-    public Master createMaster(@Valid @RequestBody Master master) throws RecordAlreadyExistsException {
+    public Master createMaster(@Valid @RequestBody Master master) throws RecordAlreadyExistsException,ItemIsNotAvailableException {
     	
         return masterService.createMaster(master);
     }
-//    @PutMapping("/loan/{id}")
-//    public ResponseEntity < Master > updateMaster(@PathVariable(value = "id") Long masterId,
-//        @Valid @RequestBody Master masterDetails) throws ServiceNotFoundException {
-//        
-//        return masterService.updateMaster(masterId, masterDetails);
-//    }
+    @PutMapping("/loan/{id}")
+    public ResponseEntity < Master > updateMaster(@PathVariable(value = "id") Long masterId,
+        @Valid @RequestBody Master masterDetails) throws ServiceNotFoundException {
+        
+        return masterService.updateMaster(masterId, masterDetails);
+    }
 //
 //    @DeleteMapping("/employees/{id}")
 //    public Map < String, Boolean > deleteEmployee(@PathVariable(value = "id") Long employeeId)
