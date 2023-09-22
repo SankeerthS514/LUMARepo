@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "user_accounts")
 public class User {
 	
-
+	@Id
     private long id;
     private String password;
     private String firstName;
@@ -41,7 +41,6 @@ public class User {
     }
 
     @Id
- 
     public long getId() {
         return id;
     }

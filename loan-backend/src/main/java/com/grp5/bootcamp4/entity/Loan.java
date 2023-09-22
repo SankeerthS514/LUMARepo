@@ -21,14 +21,14 @@ public class Loan {
     	
     }
 
-    public Loan(String loan_type,int duration_in_years) {
+    public Loan(long id, String loan_type,int duration_in_years) {
+    	this.id = id;
         this.loan_type = loan_type;
         this.duration_in_years = duration_in_years;
         
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;
     }

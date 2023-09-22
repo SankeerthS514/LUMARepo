@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotNull;
 public class Employee {
 	
 	
-
+	@Id
     private long id;
 	
 	@NotBlank(message="Must enter a First Name")
@@ -32,7 +32,8 @@ public class Employee {
 	@NotNull(message="Must enter a Date of Birth")
     private Date dob;
 	
-//	@OneToOne(mappedBy="employee")
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(referencedColumnName = "id")
 //	private User user;
 
     public Employee() {
@@ -120,7 +121,13 @@ public class Employee {
     	this.dob=dob;
     }
     
-    
+//    public User getUser() {
+//    	return user;
+//    }
+//    
+//    public void setUser(User user) {
+//    	this.user = user;
+//    }
   
     
 }
