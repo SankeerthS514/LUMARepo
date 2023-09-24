@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.Master;
+import com.grp5.bootcamp4.exceptions.CustomErrorMessage;
 import com.grp5.bootcamp4.exceptions.ItemIsNotAvailableException;
 import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
 import com.grp5.bootcamp4.service.EmployeeService;
@@ -53,7 +54,7 @@ public class LoanMasterController {
     }
     @PutMapping("/loan/{id}")
     public ResponseEntity < Master > updateMaster(@PathVariable(value = "id") Long masterId,
-        @Valid @RequestBody Master masterDetails) throws ServiceNotFoundException {
+        @Valid @RequestBody Master masterDetails) throws ServiceNotFoundException, CustomErrorMessage {
         
         return masterService.updateMaster(masterId, masterDetails);
     }

@@ -70,5 +70,12 @@ public class CustomExceptionHandler{
 		System.out.println(ex.getMessage());
 		return new ErrorResponse(HttpStatus.NOT_FOUND.value(),ex.getMessage());
 	}
+	
+	@ExceptionHandler(value = CustomErrorMessage.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public @ResponseBody ErrorResponse handleCustomErrorMessage(CustomErrorMessage ex) {
+		System.out.println(ex.getMessage());
+		return new ErrorResponse(HttpStatus.NOT_FOUND.value(),ex.getMessage());
+	}
 }
 			

@@ -14,17 +14,21 @@ public class Loan {
     private long id;
     private String loan_type;
     private int duration_in_years;
+    private String Status;
    
     
 
-    public Loan() {
+    
+
+	public Loan() {
     	
     }
 
-    public Loan(long id, String loan_type,int duration_in_years) {
+    public Loan(long id, String loan_type,int duration_in_years, String Status) {
     	this.id = id;
         this.loan_type = loan_type;
         this.duration_in_years = duration_in_years;
+        this.Status = Status;
         
     }
 
@@ -52,6 +56,15 @@ public class Loan {
     public void setduration_in_years(int duration_in_years) {
         this.duration_in_years = duration_in_years;
     }
+    
+    public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+    
 
     
 }

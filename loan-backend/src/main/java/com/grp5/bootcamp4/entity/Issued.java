@@ -10,16 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employee_issue")
+@Table(name = "issued")
 public class Issued {
 
     private long id;
     private long empid;
-    private long loan_id;
-    private long item_id;
-    private Date issue_date;
-   
-    private Date return_date;
+    private long loanid;
+    private long itemid;
+    private Date issuedate;
     
     
    
@@ -31,12 +29,13 @@ public class Issued {
     	
     }
 
-    public Issued(long empid, long item_id, Date issue_date, Date return_date ) {
+    public Issued(long loanid,long itemid,long empid,Date issuedate ) {
         
-        this.item_id=item_id;
+    	this.loanid = loanid;
+        this.itemid=itemid;
         this.empid=empid;
-        this.issue_date=issue_date;
-        this.return_date=return_date;
+        this.issuedate=issuedate;
+        
         
         
        
@@ -44,7 +43,7 @@ public class Issued {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -55,41 +54,41 @@ public class Issued {
   
 
     
-   @Column(name = "EmpId", nullable = false)
+  
     
-    public long getempid() {
+public long getempid() {
 	return empid;
 }
 
 public void setempid(long empid) {
 	this.empid = empid;
 }
-@Column(name = "Itemid", nullable = false)
-public long getitem_id() {
-	return item_id;
+
+public long getitemid() {
+	return itemid;
 }
 
-public void setitem_id(long item_id) {
-	this.item_id = item_id;
-}
-@Column(name = "Issue Date", nullable = false)
-
-public Date getissue_date() {
-	return issue_date;
+public void setitemid(long itemid) {
+	this.itemid = itemid;
 }
 
-public void setissue_date(Date issue_date) {
-	this.issue_date = issue_date;
-}
-@Column(name = "Return Date", nullable = false)
 
-public Date getreturn_date() {
-	return return_date;
+public Date getissuedate() {
+	return issuedate;
 }
 
-public void setreturn_date(Date return_date) {
-	this.return_date = return_date;
+public void setissuedate(Date issuedate) {
+	this.issuedate = issuedate;
 }
+
+public long getLoanid() {
+	return loanid;
+}
+
+public void setLoanid(long loanid) {
+	this.loanid = loanid;
+}
+
 
 
 
