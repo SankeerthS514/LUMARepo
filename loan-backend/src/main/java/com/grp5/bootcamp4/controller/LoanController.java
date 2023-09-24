@@ -20,29 +20,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Loan;
 import com.grp5.bootcamp4.repo.LoanRepository;
+import com.grp5.bootcamp4.service.LoanService;
 
 @RestController
 @RequestMapping("/api/v2")
 public class LoanController{
     @Autowired
-    private LoanRepository loanRepository;
+    private LoanService loanService;
 
     @GetMapping("/loan")
-    public List < Loan > getAlloan() {
-        return loanRepository.findAll();
+    public List < Loan > getAllLoan() {
+        return loanService.getAllLoan();
     }
 
     @GetMapping("/loan/{id}")
-    public Object getLoanById(@PathVariable(value = "id") Long loanId) {
-    	Object loan = loanRepository.findById(loanId);
-    	return ResponseEntity.ok().body(loan);
+    public Loan getLoanById(@PathVariable(value = "id") Long loanId) {
+    	return loanService.getLoanById(loanId);
+    	
+	}
+    
+    @GetMapping("/loan/approved/{id}")
+    public List<Loan> getApprovedLoanById(@PathVariable(value = "id") Long empid) {
+    	return loanService.getAllActiveLoan(empid);
+    
 	}
     
 
-    @PostMapping("/loan")
-    public Loan createLoan(@Valid @RequestBody Loan loan) {
-        return loanRepository.save(loan);
-    }
+//    @PostMapping("/loan")
+//    public Loan createLoan(@Valid @RequestBody Loan loan) {
+//        return loanRepository.save(loan);
+//    }
 //    @PutMapping("/employees/{id}")
 //    public ResponseEntity < Employee > updateEmployee(@PathVariable(value = "id") Long employeeId,
 //        @Valid @RequestBody Employee employeeDetails) throws ConfigDataResourceNotFoundException {

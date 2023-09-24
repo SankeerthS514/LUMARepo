@@ -42,8 +42,13 @@ public class LoanMasterController {
     }
 
     @GetMapping("/loan/{id}")
-    public List<Master> getMasterId(@PathVariable(value = "id") Long masterId) {
-    	return masterService.getMasterId(masterId);
+    public List<Master> getMasterId(@PathVariable(value = "id") Long empid) {
+    	return masterService.getMasterId(empid);
+	}
+    
+    @GetMapping("/loan/approved/{id}")
+    public List<Master> getApprovedMasterId(@PathVariable(value = "id") Long empid) {
+    	return masterService.getApprovedMasterId(empid);
 	}
     
 

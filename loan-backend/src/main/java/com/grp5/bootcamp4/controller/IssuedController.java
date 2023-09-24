@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.Issued;
+import com.grp5.bootcamp4.entity.Item;
 import com.grp5.bootcamp4.service.EmployeeService;
 import com.grp5.bootcamp4.service.IssuedService;
 
@@ -30,4 +31,9 @@ public class IssuedController {
     public Issued getissuedById(@PathVariable(value = "id") Long issuedId) {
     	return issuedService.getIssuedById(issuedId);
 	}
+    
+    @GetMapping("/issued/items/{id}")
+    public List<Item> getIssuedByempId(@PathVariable(value = "id") Long empid){
+    	return issuedService.getIssuedByempId(empid);
+    }
 }

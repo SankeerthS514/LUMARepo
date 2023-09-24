@@ -1,7 +1,5 @@
 package com.grp5.bootcamp4.service;
 
-import java.util.List;
-
 import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.entity.Issued;
 import com.grp5.bootcamp4.entity.Item;
@@ -55,9 +53,20 @@ public class MasterService {
     }
     
     
-    public List<Master> getMasterId(Long masterId) {
+    public List<Master> getMasterId(Long empid) {
     	
-    	return  masterRepository.findAllByEmpid(masterId);
+    	return  masterRepository.findAllByEmpid(empid);
+	}
+
+    public List<Master> getApprovedMasterId(Long empid) {
+    	List<Master> allLoan = masterRepository.findAllByEmpid(empid);
+    	List<Master> allActiveLoan = new ArrayList<Master>();
+    	for(Master loan:allLoan) {
+    		if(loan.getStatus().equals("Approved")) {
+    			allActiveLoan.add(loan);
+    		}
+    	}
+    	return allActiveLoan; 
 	}
     
     public Master createMaster(Master master) throws RecordAlreadyExistsException, ItemIsNotAvailableException {
@@ -80,38 +89,46 @@ public class MasterService {
         	    Master master = masterRepository.findById(masterId)
                     .orElseThrow();
         	    
-        	    System.out.println(!master.getStatus().equals("Pending"));
+        	    //System.out.println(!master.getStatus().equals("Pending"));
         	    
                 
                 
                 
                 
                 
-                
+                // Switch case for changing state of the Loan by the admin
                 switch(masterDetails.getStatus()) {
                 case "Approved":
+                	//Make sure that the status can only be changed on pending loans
                   if(!master.getStatus().equals("Pending")) {
             	    	throw new CustomErrorMessage("Action has already been taken on your loan");
             	    }	
-                  
+                  //Create a loan card with the details fetched for this specific loan
                   Loan loancard = new Loan(masterId,master.getItem_cat(),master.getduration_in_years(), "Approved");
+                  //Get the list of items for this loan and assign one, there will always be an item available 
+                  //since the item is reserved on application based on availability
                   List <Item> item = itemRepository.findByitemcatAndItemmakeAndItemdescAndStatus(master.getItem_cat(), master.getItem_make(), master.getItem_desc(),"Reserved");
                   
                   Item issuedItem = item.get(0);
+                  //Set the status of the item as issued so that it cannot be assigned to a different loan
                   issuedItem.setStatus("Issued");
               	  itemRepository.save(issuedItem);
+              	  //Add the item to the issued table, along with the loan ID and the emp ID
               	  Issued issue = new Issued(masterId,issuedItem.getId(),master.getempid(),new Date());
               	  issuedRepository.save(issue);
                   loanRepository.save(loancard);
                   break;
                 case "Closed":
+                  //The loan can only be applied on loans that are of approved status
                   if(!master.getStatus().equals("Approved")) {
             	    	throw new CustomErrorMessage("Action has already been taken on your loan");
             	    }
+                  //The issued item must be removed from the issued table and the loan must change status to closed
                   Issued closedIssue = issuedRepository.findByloanid(masterId);
                   Loan closedLoan = loanRepository.findById(masterId).get();
                   closedLoan.setStatus("Closed");
                   loanRepository.save(closedLoan);
+                  //The item must get the available status as it is returned 
                   long ItemId = closedIssue.getitemid();
                   issuedRepository.deleteById(closedIssue.getId());
                   Item Returneditem = itemRepository.findById(ItemId).get();

@@ -14,5 +14,8 @@ public interface IssuedRepository extends JpaRepository<Issued, Long>{
 
 	Issued findByloanid(Long masterId);
 
+
+	List<Issued> findAllByempid(Long empid);
+
 	//List <Issued> findByitemcatAndItemmakeAndItemdescAndStatus(String itemcat, String itemmake, String itemdesc, String Status);
 }

@@ -45,7 +45,11 @@ public class ItemController {
 //    public List<Master> getMasterId(@PathVariable(value = "id") Long masterId) {
 //    	return masterService.getMasterId(masterId);
 //	}
-    
+    @GetMapping("/item/{id}")
+    public Item getItemById(Long id) {
+    	
+    	return  itemService.getItemById(id);
+	}
 
     @PostMapping("/item")
     public Item createItem(@Valid @RequestBody Item item){
