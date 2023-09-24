@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +30,7 @@ import com.grp5.bootcamp4.entity.Employee;
 import com.grp5.bootcamp4.exceptions.RecordAlreadyExistsException;
 import com.grp5.bootcamp4.repo.EmployeeRepository;
 
-@CrossOrigin
-@RestController
-@RequestMapping("/api/v1")
+@Service
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
