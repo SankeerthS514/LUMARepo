@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grp5.bootcamp4.entity.Loan;
 import com.grp5.bootcamp4.repo.LoanRepository;
 import com.grp5.bootcamp4.service.LoanService;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v2")
 public class LoanController{
