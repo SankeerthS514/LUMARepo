@@ -80,6 +80,7 @@ public class MasterService {
     		throw new ItemIsNotAvailableException("This Item Is Not Available");
     	}
     	Item issuedItem = item.get(0);
+    	master.setItem_value(issuedItem.getItemvalue());
     	issuedItem.setStatus("Reserved");
     	itemRepository.save(issuedItem);
         return masterRepository.save(master);
@@ -91,18 +92,17 @@ public class MasterService {
         	    
         	    //System.out.println(!master.getStatus().equals("Pending"));
         	    
-                
-                
-                
-                
-                
                 // Switch case for changing state of the Loan by the admin
                 switch(masterDetails.getStatus()) {
                 case "Approved":
+                	
                 	//Make sure that the status can only be changed on pending loans
                   if(!master.getStatus().equals("Pending")) {
             	    	throw new CustomErrorMessage("Action has already been taken on your loan");
             	    }	
+                  
+                  master.setIssue_date(new Date());;
+                  masterRepository.save(master);
                   //Create a loan card with the details fetched for this specific loan
                   Loan loancard = new Loan(masterId,master.getItem_cat(),master.getduration_in_years(), "Approved");
                   //Get the list of items for this loan and assign one, there will always be an item available 

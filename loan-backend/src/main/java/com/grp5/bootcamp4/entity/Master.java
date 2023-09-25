@@ -31,12 +31,12 @@ public class Master {
     	
     }
 
-    public Master(long empid, String item_cat, String item_make, String item_desc, long item_value, String status,int duration_in_years) {
+    public Master(long empid, String item_cat, String item_make, String item_desc, String status,int duration_in_years) {
         this.empid=empid;
         this.item_cat=item_cat;
         this.item_make=item_make;
         this.item_desc=item_desc;
-        this.item_value=item_value;
+        //this.item_value=item_value;
         this.issue_date=null;
         this.status=status;
         this.duration_in_years = duration_in_years;
