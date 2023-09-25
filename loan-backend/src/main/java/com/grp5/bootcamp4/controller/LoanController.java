@@ -50,24 +50,17 @@ public class LoanController{
 //    public Loan createLoan(@Valid @RequestBody Loan loan) {
 //        return loanRepository.save(loan);
 //    }
-//    @PutMapping("/employees/{id}")
-//    public ResponseEntity < Employee > updateEmployee(@PathVariable(value = "id") Long employeeId,
-//        @Valid @RequestBody Employee employeeDetails) throws ConfigDataResourceNotFoundException {
-//        Optional<Employee> employee = employeeRepository.findById(employeeId)l
-//            
-//
-//        employee.setEmailId(employeeDetails.getEmailId());
-//        employee.setLastName(employeeDetails.getLastName());
-//        employee.setFirstName(employeeDetails.getFirstName());
-//        final Employee updatedEmployee = employeeRepository.save(employee);
-//        return ResponseEntity.ok(updatedEmployee);
-//    }
+    @PutMapping("/loan/{id}")
+    public ResponseEntity < Loan > updateLoan(@PathVariable(value = "id") Long loanId,
+        @Valid @RequestBody Loan loanDetails) throws ConfigDataResourceNotFoundException {
+        return loanService.updateLoan(loanId, loanDetails);
+    }
 
-//    @DeleteMapping("/employees/{id}")
-//    public Map < String, Boolean > deleteEmployee(@PathVariable(value = "id") Long employeeId)
+//    @DeleteMapping("/loans/{id}")
+//    public Map < String, Boolean > deleteLoan(@PathVariable(value = "id") Long loanId)
 //    
 //
-//        employeeRepository.delete(employee);
+//        loanRepository.delete(loan);
 //        Map < String, Boolean > response = new HashMap < > ();
 //        response.put("deleted", Boolean.TRUE);
 //        return response;
