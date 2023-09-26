@@ -2,17 +2,19 @@ import React from 'react'
 // import LoanCard from './LoanCard';
 // import LoanApply from './LoanApply';
 // import PurchasedItems from './PurchasedItems';
-// import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 
-const Home = ()=>{
-    // const navigate = useNavigate();
-    // const navigateLoanCard=()=>{
-    //     navigate('/loan-card');
-    // }
-    // const navigateLoanApply=()=>{
-    //     navigate('/loan-apply');
-    // }
+const Home = (props)=>{
+    const navigate = useNavigate();
+    const location = useLocation();
+    const userId = location.state && location.state.userId;
+    const navigateLoanCard=()=>{
+        navigate(`/loan-card/${userId}`);
+    }
+    const navigateLoanApply=()=>{
+        navigate('/loan-apply', {state: {userId: props.userId}});
+    }
     // const navigatePurchasedItems=()=>{
     //     navigate('/purchased-items');
     // }
@@ -40,7 +42,7 @@ const Home = ()=>{
                                     <li>Enjoy your benefits</li>
                                 </ul>
                                 <button type="button" class="btn btn-lg btn-block btn-outline-dark"
-                                >Apply Here</button>
+                                 onClick={navigateLoanApply}>Apply Here</button>
                             </div>
                         </div></div>
                         <div className='col' style={{"padding":"2%"}}>
@@ -55,6 +57,7 @@ const Home = ()=>{
                                     <li style={{"font-color":"red"}}>User Specific</li>
                                 </ul>
                                 <button type="button" class="btn btn-lg btn-block btn-outline-dark"
+                                onClick={navigateLoanCard}
                                >View Here</button>
                             </div>
                         </div></div>

@@ -2,14 +2,15 @@ import React, {useState} from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-
-// const [error,setError] = useState({})
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Register(){
     const navigate = useNavigate();
     const navigateLogin=()=>{navigate("/login");}
     const url = "http://localhost:8080/api/v1/employees"
+    const [username, setUsername] = useState('');
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [desig, setDesig] = useState('');
@@ -74,8 +75,25 @@ function Register(){
         // console.log(lastname);
         //validate
         console.log(validate());
+        // console.log(firstname);
+        // console.log(lastname);
+        // if(firstname==="" || lastname==="" || desig==="" || department==="" || mail==="" || dob==="" || doj==="")
+        // {
+        //     alert("Please Fill All Fields");
+        // }
+        // else{
+        // axios.post(url,{firstName:firstname,lastName:lastname,id:username,designation:desig,
+        // deparment:department,emailId:mail,dob:dob,doj:doj})
+        // .then(response => {
+        //   console.log(response);
+        //   if(response.data == 'sucess')
+        //     navigate("/admin");
+        // })
+        // .catch(error=>{console.log(error)});
+        // console.log("sent");
+        // alert("Data Submitted");}
         if(validate()){
-            axios.post(url,{firstName:firstname,lastName:lastname,designation:desig,
+            axios.post(url,{firstName:firstname,lastName:lastname,id: username,designation:desig,
             deparment:department,emailId:mail,dob:dob,doj:doj})
             .then(response => {
                 console.log(response);
@@ -84,11 +102,18 @@ function Register(){
             })
             .catch(error=>{console.log(error)});
             console.log("sent");
+            // toast("Data Submitted");
+            toast("User Created",{position : toast.POSITION.BOTTOM_CENTER});
+            // alert("Toast");
+            const timer = setTimeout(() => {
+            navigateLogin();
+              }, 3000);
         }
     }
 
         
     return(
+    <>
     <div>
         <center>
             <Card>
@@ -117,11 +142,11 @@ function Register(){
                             </div>
                         )}
                     </div>
-                     {/* {<div class="form-outline mb-4 form-group">
+                     {<div class="form-outline mb-4 form-group">
                         <input type="text" id="uid" class="form-control" 
                         onChange={(e)=>setUsername(e.target.value)}
                         placeholder="Enter User-ID" required/>
-                    </div>}  */}
+                    </div>} 
                     <div class="form-outline mb-4 form-group">
                         <input type="email" id="mail" class="form-control" 
                         onChange={(e)=>setMail(e.target.value)}
@@ -150,14 +175,7 @@ function Register(){
                             </div>
                         )}
                     </div>
-                    {/* <div class="form-outline mb-4 form-group">
-                        <select type="text" id="gender" class="form-control" required>
-                            <option selected>Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="trans">Transgender</option>
-                        </select>
-                    </div> */}
+                    
                     <div class="form-outline mb-4 form-group">
                         <input type="text" id="desig" class="form-control" 
                         onChange={(e)=>setDesig(e.target.value)}
@@ -192,6 +210,7 @@ function Register(){
                     <div class="text-center">
                     <p>Already a member? <a href="/login">Login</a></p>
                     </div></div>
+                    <div></div>
                 </form>
             </Card>
             <br/>
@@ -199,6 +218,8 @@ function Register(){
         </center>
         
     </div>
+    <ToastContainer/>
+    </>
     )
 }
 
