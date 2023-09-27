@@ -2,6 +2,8 @@ package com.grp5.bootcamp4.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class Issued {
     private long empid;
     private long loanid;
     private long itemid;
+    
     private Date issuedate;
     
     

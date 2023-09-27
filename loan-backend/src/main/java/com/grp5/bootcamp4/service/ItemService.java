@@ -29,4 +29,9 @@ public class ItemService {
 	        return itemRepository.save(item);
 	    }
 
+	public List<Item> getAllItem() {
+		// TODO Auto-generated method stub
+		return itemRepository.findAll();
+	}
+
 }

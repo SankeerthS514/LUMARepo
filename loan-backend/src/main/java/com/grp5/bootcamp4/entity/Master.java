@@ -2,6 +2,8 @@ package com.grp5.bootcamp4.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Master {
     private String item_desc;
     private int duration_in_years;
     private long item_value;
+    
     private Date issue_date;
     private String status;
    
