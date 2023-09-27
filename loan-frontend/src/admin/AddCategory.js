@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AddCategory =()=>{
     const [category, setCategory] = useState('');
     const [itemDescription, setItemDescription] = useState('');
@@ -54,8 +57,12 @@ const AddCategory =()=>{
         itemdesc:itemDescription,itemvalue:val,status:"Available"})
         .then(response => {
           console.log(response);
-          if(response.data == 'sucess')
+          if(response.data == 'sucess'){
             navigate("/admin");
+            toast.success("Category created!");
+          }
+          else
+            toast.error("Invalid request!")
         })
         .catch(error=>{console.log(error)});
         console.log("sent");
@@ -124,7 +131,18 @@ const AddCategory =()=>{
                     </Card.Body>
                 </Card>
             </center>
-            
+            <ToastContainer
+position="top-center"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
         </div>
 )}
 
