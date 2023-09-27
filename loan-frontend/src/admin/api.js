@@ -36,7 +36,7 @@ const updateEmployee = async (id, employee) => {
     }
     throw error; // Re-throw the error for the caller to handle
   }
-  return true;
 };
+
 
 export { addEmployee, getAll, deleteEmployee, getById, updateEmployee };

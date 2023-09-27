@@ -121,7 +121,7 @@ const EditEmployee=() => {
                 </div>
                 <div class="form-outline mb-4 form-group">
                     <input type="text" className="form-control" 
-                    placeholder="Date Of Joining(YYYY-MM-DD)" onChange={onDojChange}  value={(doj)}/>
+                    placeholder="Date Of Joining(YYYY-MM-DD)" onChange={onDojChange}  value={formatDate(doj)}/>
                 </div>
                 <div class="form-outline mb-4 form-group">
                     <input type="text" className="form-control" 

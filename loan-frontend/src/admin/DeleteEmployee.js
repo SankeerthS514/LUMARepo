@@ -30,7 +30,7 @@ const DeleteEmployee=()=>{
 
     return (
         <div className="container" style={{"padding":"10%"}}><center>
-            <h3 className="text-danger">Do you want to delete employee {employee.firstName}</h3><br/>
+            <h3 className="text-danger">Do you want to delete employee {employee.firstName}</h3>
             <div className="col-4">
 
                 <table className="table table-striped table-bordered">
